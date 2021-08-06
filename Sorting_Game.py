@@ -22,13 +22,23 @@ class Sorting_game():
                 self.index_space[0] = i
                 self.index_space[1] = self.board[i].index(" ")
 
+    def EZ_board_start(self):
+        self.board = [["A","B","C","D"], ["E","F","G","H"], [" ","I","J","K"]]
+        for i in range(len(self.board)):
+            if " " in self.board[i]:
+                self.index_space[0] = i
+                self.index_space[1] = self.board[i].index(" ")
+
     def display_board(self):
         for i in self.board:
             print(f"{i[0]} {i[1]} {i[2]} {i[3]}")
         print("--------")
             
     def check_endgame(self):
-        pass
+        if self.board == [["A","B","C","D"], ["E","F","G","H"], ["I","J","K"," "]]:
+            return True
+        else:
+            return False
     
     def move_character(self,c:str):
         # top check
@@ -78,13 +88,13 @@ class input_processor():
                     print("Please Enter A-K")
     def get_input(self):
         return self.letter
-#game_sort = input_processor()
-#print(game_sort.get_input())
 if __name__ == '__main__':
     game = Sorting_game()
+    game.EZ_board_start()
     # game.random_board_start()
     game.display_board()
-    while True:
-        c = input("INPUT : ")
-        game.move_character(c)
+    while not game.check_endgame():
+        INPUT = input_processor()
+        game.move_character(INPUT.get_input())
         game.display_board()
+    print("WIN")
