@@ -1,14 +1,31 @@
 class Sorting_game():
     def __init__(self):
-        self.board= [["A","B","C","D"], ["E","F","G","H"], ["I","J","K"," "]]
-        self.index_space = [0]*2
+        self.board = [["A","B","C","D"], ["E","F","G","H"], ["I","J","K"," "]]
+        self.index_space = [2,3]
     
     def random_board_start(self):
-        pass
+        from random import randint, shuffle
+
+        shuffle(self.board)
+        shuffle(self.board[0])
+        shuffle(self.board[1])
+        shuffle(self.board[2])
+
+        for i in range(randint(0,4)):
+            for j in range(12):
+                index_ran1 = [randint(0,2) ,randint(0,3)]
+                index_ran2 = [randint(0,2) ,randint(0,3)]
+                self.board[index_ran1[0]][index_ran1[1]], self.board[index_ran2[0]][index_ran2[1]] = self.board[index_ran2[0]][index_ran2[1]], self.board[index_ran1[0]][index_ran1[1]]
+
+        for i in range(len(self.board)):
+            if " " in self.board[i]:
+                self.index_space[0] = i
+                self.index_space[1] = self.board[i].index(" ")
 
     def display_board(self):
-        pass
-    
+        for i in self.board:
+            print(f"{i[0]} {i[1]} {i[2]} {i[3]}")
+            
     def check_endgame(self):
         pass
     
