@@ -73,6 +73,7 @@ class Sorting_game():
                 self.board[self.index_space[0]][self.index_space[1]] = c
                 self.index_space[1] = right_index
                 return
+        print(f"Can not move : {c}")
 class input_processor():
     def __init__(self):
         self.letter = ""
