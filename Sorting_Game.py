@@ -1,3 +1,4 @@
+# -------------------- GAME --------------------- #
 class Sorting_game():
     def __init__(self):
         self.board = [["A","B","C","D"], ["E","F","G","H"], ["I","J","K"," "]]
@@ -5,8 +6,8 @@ class Sorting_game():
     
     def random_board_start(self):
         from random import choice
-
-        for ran in range(1000):
+        char_remember = [None]*3
+        for ran in range(choice([num for num in range(50,250)])):
             char_able = list()
             for i in [-1,1]:
                 ht_letter = [self.index_space[0],self.index_space[1]+i]
@@ -16,15 +17,11 @@ class Sorting_game():
                 if 0<= vc_letter[0] <=2:
                     char_able.append(self.board[vc_letter[0]][vc_letter[1]])
             moving_char = choice(char_able)
-            self.move_character(moving_char)
-        
-
-    def EZ_board_start(self):
-        self.board = [["A","B","C","D"], ["E","F","G","H"], [" ","I","J","K"]]
-        for i in range(len(self.board)):
-            if " " in self.board[i]:
-                self.index_space[0] = i
-                self.index_space[1] = self.board[i].index(" ")
+            if moving_char not in char_remember:
+                self.move_character(moving_char)
+            if choice([True,False]) :
+                char_remember[ran%3] = moving_char
+        #perfect random
 
     def display_board(self):
         for i in self.board:
@@ -71,6 +68,15 @@ class Sorting_game():
                 self.index_space[1] = right_index
                 return
         print(f"Can not move : {c}")
+
+    '''def EZ_board_start(self):
+        self.board = [["A","B","C","D"], ["E","F","G","H"], [" ","I","J","K"]]
+        for i in range(len(self.board)):
+            if " " in self.board[i]:
+                self.index_space[0] = i
+                self.index_space[1] = self.board[i].index(" ")'''
+
+# --------------- INPUT PROCESSOR --------------- #
 class input_processor():
     def __init__(self):
         self.letter = ""
