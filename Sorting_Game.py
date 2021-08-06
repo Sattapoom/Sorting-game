@@ -33,4 +33,19 @@ class Sorting_game():
         pass
 
 class input_processor():
-    pass
+    def __init__(self):
+        self.letter = ""
+        self.checker = ["A","B","C","D","E","F","G","H","I","J","K"]
+        self.check_input()
+    def check_input(self):
+        while True:
+                input_letter = input("Input letter : ")
+                if input_letter.upper() in self.checker:
+                    self.letter = input_letter.upper()
+                    break
+                else:
+                    print("Please Enter A-K")
+    def get_input(self):
+        return self.letter
+#game_sort = input_processor()
+#print(game_sort.get_input())
