@@ -4,23 +4,20 @@ class Sorting_game():
         self.index_space = [2,3]
     
     def random_board_start(self):
-        from random import randint, shuffle
+        from random import choice
 
-        shuffle(self.board)
-        shuffle(self.board[0])
-        shuffle(self.board[1])
-        shuffle(self.board[2])
-
-        for i in range(randint(0,4)):
-            for j in range(12):
-                index_ran1 = [randint(0,2) ,randint(0,3)]
-                index_ran2 = [randint(0,2) ,randint(0,3)]
-                self.board[index_ran1[0]][index_ran1[1]], self.board[index_ran2[0]][index_ran2[1]] = self.board[index_ran2[0]][index_ran2[1]], self.board[index_ran1[0]][index_ran1[1]]
-
-        for i in range(len(self.board)):
-            if " " in self.board[i]:
-                self.index_space[0] = i
-                self.index_space[1] = self.board[i].index(" ")
+        for ran in range(1000):
+            char_able = list()
+            for i in [-1,1]:
+                ht_letter = [self.index_space[0],self.index_space[1]+i]
+                vc_letter = [self.index_space[0]+i,self.index_space[1]]
+                if 0<= ht_letter[1] <=3:
+                    char_able.append(self.board[ht_letter[0]][ht_letter[1]])
+                if 0<= vc_letter[0] <=2:
+                    char_able.append(self.board[vc_letter[0]][vc_letter[1]])
+            moving_char = choice(char_able)
+            self.move_character(moving_char)
+        
 
     def EZ_board_start(self):
         self.board = [["A","B","C","D"], ["E","F","G","H"], [" ","I","J","K"]]
@@ -91,8 +88,8 @@ class input_processor():
         return self.letter
 if __name__ == '__main__':
     game = Sorting_game()
-    game.EZ_board_start()
-    # game.random_board_start()
+    #game.EZ_board_start()
+    game.random_board_start()
     game.display_board()
     while not game.check_endgame():
         INPUT = input_processor()
